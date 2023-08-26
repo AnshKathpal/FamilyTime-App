@@ -15,11 +15,14 @@ export const Register = () => {
         <Button onClick={() => setToggle(true)}>Register As Head</Button>
         <Button onClick={() => setToggle(false)}>Register As Member</Button>
       </Box>
-
       {toggle ? <HeadRegistration /> : <MemberRegistration />}
-
-      {toggle ? "Already a Head ? " : "Already a Member? "} <Link to = "/login">Login</Link> here
-
+      {toggle ? "Already a Head ? " : "Already a Member? "}
+      {toggle ? (
+        <Link to="/headlogin">Login</Link>
+      ) : (
+        <Link to="/memberlogin">Login</Link>
+      )}{" "}
+      here
     </Box>
   );
 };

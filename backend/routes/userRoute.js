@@ -4,13 +4,15 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const User = require("../model/userModel");
+// const User = require("../model/userModel");
+const Head = require("../model/headModel")
+const Member = require("../model/memberModel")
 
 userRoute.post("/headregister", async (req, res) => {
   const { email, username, fullname, password } = req.body;
 
   try {
-    const userFind = await User.userModel.findOne({ email });
+    const userFind = await Head.headModel.findOne({ email });
     if (userFind) {
       res.status(400).json({ err: "User Already Exists. Please Login!!" });
     } else {
@@ -18,7 +20,7 @@ userRoute.post("/headregister", async (req, res) => {
         if (err) {
           res.status(400).json({ err: err.message });
         } else {
-          const user = new User.userModel({
+          const user = new Head.headModel({
             email,
             username,
             password: hash,
@@ -41,7 +43,7 @@ userRoute.post("/memberregister", async (req, res) => {
   const predefinedCode = "12345";
 
   try {
-    const userFind = await User.userModel.findOne({ email });
+    const userFind = await Member.memberModel.findOne({ email });
   
     if (sharecode != predefinedCode) {
       res.status(400).json({ err: "Code is incorrect" });
@@ -53,7 +55,7 @@ userRoute.post("/memberregister", async (req, res) => {
           if (err) {
             res.status(400).json({ err: err.message });
           } else {
-            const user = new User.userModel({
+            const user = new Member.memberModel({
               email,
               username,
               password: hash,
@@ -76,7 +78,7 @@ userRoute.post("/headlogin", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.userModel.findOne({ email });
+    const user = await Head.headModel.findOne({ email });
     if (user) {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
@@ -104,7 +106,7 @@ userRoute.post("/memberlogin", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.userModel.findOne({ email });
+    const user = await Member.memberModel.findOne({ email });
     if (user) {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {

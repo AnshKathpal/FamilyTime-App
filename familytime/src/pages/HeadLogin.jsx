@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { headLogin } from "../redux/Authentication/action";
+import { Box } from "@chakra-ui/react";
 
-export const Login = () => {
+export const HeadLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,6 +31,7 @@ export const Login = () => {
 
   return (
     <>
+      <Box>Head Login</Box>
       <form action="" onSubmit={handleSubmit}>
         <input
           type="email"
