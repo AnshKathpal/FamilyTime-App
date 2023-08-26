@@ -14,6 +14,8 @@ export const MemberRegistration = () => {
 
   const registerStatus = useSelector((store) => store.authReducer);
   console.log(registerStatus);
+  const auth = useSelector((store) => store.authReducer.isAuth)
+  console.log(auth)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +25,13 @@ export const MemberRegistration = () => {
 
     const registerdata = { email, username, password, fullname, sharecode };
     dispatch(memberRegister(registerdata));
+
+    console.log(auth,"check")
+    // if(auth){
+    //   navigate("/memberlogin")
+    // }else{
+    //   navigate("/")
+    // }
   };
 
   return (

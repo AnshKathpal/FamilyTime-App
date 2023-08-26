@@ -5,6 +5,8 @@ import { HeadRegistration } from "../pages/HeadRegistration";
 import { MemberRegistration } from "../pages/MemberRegistration";
 import { Login } from "../pages/Login";
 import { Posts } from "../pages/Posts";
+import { HeadLogin } from "../pages/HeadLogin";
+import { MemberLogin } from "../pages/MemberLogin";
 
 export const AllRoutes = () => {
   return (
@@ -12,8 +14,10 @@ export const AllRoutes = () => {
       <Route path="/" element={<Register />} />
       <Route path="/headregister" element={<HeadRegistration />} />
       <Route path="/memberregister" element={<MemberRegistration />} />
-      <Route path="/login" element={<Login />} />
-      <Route path = "/posts" element = {<Posts/>} />
+      {/* <Route path="/login" element={<Login />} /> */}
+      <Route path="/headlogin" element={<HeadLogin />} />
+      <Route path="/memberlogin" element={<MemberLogin />} />
+      <Route path="/posts" element={<Posts />} />
     </Routes>
   );
 };

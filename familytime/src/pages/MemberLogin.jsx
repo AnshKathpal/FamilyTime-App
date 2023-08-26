@@ -2,9 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { headLogin } from "../redux/Authentication/action";
+import { headLogin, memberLogin } from "../redux/Authentication/action";
+import { Box } from "@chakra-ui/react";
 
-export const Login = () => {
+export const MemberLogin = () => {
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,18 +21,17 @@ export const Login = () => {
     e.preventDefault();
 
     let loginData = { email, password };
-    dispatch(headLogin(loginData));
-
+    console.log(loginData)
+    dispatch(memberLogin(loginData));
     console.log(loginStatus.isAuth);
-    if (loginStatus.isAuth) {
-      navigate("/posts");
-    } else {
-      navigate("/");
-    }
+    
+
+    
   };
 
   return (
     <>
+      <Box>Member Login</Box>
       <form action="" onSubmit={handleSubmit}>
         <input
           type="email"

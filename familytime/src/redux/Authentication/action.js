@@ -15,7 +15,7 @@ let baseurl = "http://localhost:8080";
 
 export const headRegister = (obj) => (dispatch) => {
   axios
-    .post(`${baseurl}/user/headregister`, obj)
+    .post(`${baseurl}/head/headregister`, obj)
     .then((res) => {
       dispatch({ type: HEADREGISTERSUCCESS });
       console.log(res);
@@ -29,7 +29,7 @@ export const headRegister = (obj) => (dispatch) => {
 
 export const memberRegister = (obj) => (dispatch) => {
   axios
-    .post(`${baseurl}/user/memberregister`, obj)
+    .post(`${baseurl}/member/memberregister`, obj)
     .then((res) => {
       dispatch({ type: MEMBERREGISTERSUCCESS });
       console.log(res);
@@ -44,7 +44,7 @@ export const memberRegister = (obj) => (dispatch) => {
 export const headLogin = (obj) => (dispatch) => {
   dispatch({ type: HEADLOGINLOADING });
   axios
-    .post(`${baseurl}/user/headlogin`, obj)
+    .post(`${baseurl}/head/headlogin`, obj)
     .then((res) => {
       dispatch({ type: HEADLOGINSUCCESS, payload: res.data.token });
       console.log(res);
@@ -58,7 +58,7 @@ export const headLogin = (obj) => (dispatch) => {
 export const memberLogin = (obj) => (dispatch) => {
   dispatch({ type: MEMBERLOGINLOADING });
   axios
-    .post(`${baseurl}/user/memberlogin`, obj)
+    .post(`${baseurl}/member/memberlogin`, obj)
     .then((res) => {
       dispatch({ type: MEMBERLOGINSUCCESS, payload: res.data.token });
       console.log(res);
