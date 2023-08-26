@@ -3,27 +3,26 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema({
   email: {
     type: String,
-    required: true,
+    // required: true,
   },
   fullname: {
     type: String,
-    required: true,
+    // required: true,
   },
   username: {
     type: String,
-    required: true,
+    // required: true,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
-  shareCode : {
+  sharecode : {
     type : String,
   }
 });
 
 const userModel = mongoose.model("User", userSchema);
-
 module.exports = {
   userModel
 }
