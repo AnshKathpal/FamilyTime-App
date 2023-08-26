@@ -42,6 +42,7 @@ userRoute.post("/memberregister", async (req, res) => {
 
   try {
     const userFind = await User.userModel.findOne({ email });
+  
     if (sharecode != predefinedCode) {
       res.status(400).json({ err: "Code is incorrect" });
     } else {
