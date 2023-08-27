@@ -29,7 +29,12 @@ export const headRegister = (obj) => (dispatch) => {
 
 export const memberRegister = (obj) => (dispatch) => {
   axios
-    .post(`${baseurl}/member/memberregister`, obj)
+    .post(`${baseurl}/member/memberregister`, obj,{
+      headers: {
+        'Content-Type': 'application/json',
+        withCredentials: true, // This allows sending cookies
+      }
+    })
     .then((res) => {
       dispatch({ type: MEMBERREGISTERSUCCESS });
       console.log(res);

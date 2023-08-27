@@ -3,10 +3,10 @@ const userRoute = express.Router();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
 
-// const User = require("../model/userModel");
-const Head = require("../model/headModel")
-const Member = require("../model/memberModel")
+const Head = require("../model/headModel");
+const Member = require("../model/memberModel");
 
 userRoute.post("/headregister", async (req, res) => {
   const { email, username, fullname, password } = req.body;
@@ -40,14 +40,18 @@ userRoute.post("/headregister", async (req, res) => {
 userRoute.post("/memberregister", async (req, res) => {
   const { email, username, fullname, password, sharecode } = req.body;
 
-  const predefinedCode = "12345";
+  // const sharecodeFromFrontend = req.body.sharecode;
+  // const generatedCodeFromCookie = req.cookies.generatedCode;
+
+  // console.log(sharecodeFromFrontend);
+  // console.log(generatedCodeFromCookie);
 
   try {
-    const userFind = await Member.memberModel.findOne({ email });
-  
-    if (sharecode != predefinedCode) {
-      res.status(400).json({ err: "Code is incorrect" });
-    } else {
+    // if (sharecodeFromFrontend != generatedCodeFromCookie) {
+    //   res.status(400).json({ err: "Code is incorrect" });
+    // } else {
+      const userFind = await Member.memberModel.findOne({ email });
+
       if (userFind) {
         res.status(400).json({ err: "User Already Exists. Please Login!!" });
       } else {
@@ -60,13 +64,13 @@ userRoute.post("/memberregister", async (req, res) => {
               username,
               password: hash,
               fullname,
-              sharecode,
+              sharecode
             });
             await user.save();
             res.status(200).json({ msg: "User Registred" });
           }
         });
-      }
+      // }
     }
   } catch (error) {
     console.log(error.message);
