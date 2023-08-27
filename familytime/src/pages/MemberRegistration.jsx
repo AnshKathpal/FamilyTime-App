@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { headRegister, memberRegister } from "../redux/Authentication/action";
 import { Box, Flex } from "@chakra-ui/react";
 
+import { useCookies } from "react-cookie";
+
 export const MemberRegistration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,26 +14,41 @@ export const MemberRegistration = () => {
   const [fullname, setFullname] = useState("");
   const [sharecode, setSharecode] = useState("");
 
+  const [cookies] = useCookies(["generatedCode"]);
+
+
+
   const registerStatus = useSelector((store) => store.authReducer);
   console.log(registerStatus);
-  const auth = useSelector((store) => store.authReducer.isAuth)
-  console.log(auth)
+  const auth = useSelector((store) => store.authReducer.isAuth);
+  console.log(auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const registerdata = { email, username, password, fullname, sharecode };
+    const generatedCode = cookies.generatedCode;
+    console.log(generatedCode, "code")
+
+    console.log(sharecode,"shared")
+
+    if (sharecode != generatedCode) {
+      alert("Incorrect Share Code. Please enter the correct code.");
+      return;
+    }
+
+    const registerdata = {
+      email,
+      username,
+      password,
+      fullname,
+      sharecode: generatedCode,
+    };
     dispatch(memberRegister(registerdata));
 
-    console.log(auth,"check")
-    // if(auth){
-    //   navigate("/memberlogin")
-    // }else{
-    //   navigate("/")
-    // }
+    console.log(auth, "check");
   };
 
   return (
@@ -78,7 +95,7 @@ export const MemberRegistration = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          type="string"
+          type="number"
           value={sharecode}
           placeholder="Enter Shared Code"
           onChange={(e) => setSharecode(e.target.value)}

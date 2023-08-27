@@ -18,7 +18,7 @@ const memberSchema = mongoose.Schema({
     required: true,
   },
   sharecode : {
-    type : String,
+    type : Number,
     required: true,
   }
 });
