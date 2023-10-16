@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 
 const {userRoute} = require("./routes/userRoute")
+const {postRoute} = require("./routes/postRoute")
+
 
 const cors = require("cors");
 require("dotenv").config();
@@ -13,6 +15,7 @@ app.use(express.json());
 
 app.use("/head",userRoute)
 app.use("/member",userRoute)
+app.use("/head",postRoute)
 
 
 

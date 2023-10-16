@@ -73,3 +73,4 @@ export const memberLogin = (obj) => (dispatch) => {
       console.log(err.message);
     });
 };
+
